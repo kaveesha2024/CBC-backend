@@ -26,6 +26,42 @@ const addProductsController = async (req, res) => {
       return;
     }
 
+    // const productId = async () => {
+    //   const response = await ProductModel.find().sort({ createdAt: -1 }).limit(1);
+    //   console.log(response);
+    //   if ( !response ) {
+    //     return "CBC00001";
+    //   }else {
+    //     return response.productId;
+    //   }
+    // };
+
+    let id = "";
+
+    // try {
+    //   const response = await ProductModel.find().sort({ createdAt: -1 }).limit(1);
+    //   if (response === 0) {
+    //     return;
+    //   }
+    //
+    //   productId = response[0].productId;
+    //
+    // }catch (error) {
+    //   res.status(500).json(error)
+    // }
+
+    const response = await ProductModel.find().sort({ createdAt: -1 }).limit(1);
+    if ( response.length > 0 ) {
+      const lastProductIdString = response[0].productId;
+      // const lastProductIdString = "CBC00341";
+        const lastProductIdStringWithoutCBC = lastProductIdString.replace('CBC', '');
+        const lastProductIdNumber = parseInt(lastProductIdStringWithoutCBC); //341
+        const nextProductIdNumber = lastProductIdNumber + 1; //342
+        const nextProductIdString = 'CBC' + nextProductIdNumber.toString().padStart(5, '0');
+        id = nextProductIdString;
+    }else {
+      id = "CBC00001";
+    }
     const {
       name,
       description,
@@ -41,6 +77,7 @@ const addProductsController = async (req, res) => {
 
     const product = new ProductModel({
       name,
+      productId: id,
       description,
       brand,
       images,
