@@ -1,6 +1,7 @@
-import express from 'express';
-import createUserController from "../../controllers/User/createUser/signupUserController.js";
+import express from "express";
+import addProductsController from "../../controllers/Product/addProducts/AddProductsController.js";
+const ProductRouter = express.Router();
 
-// ProductRouter.post(', )
+ProductRouter.post("/add", addProductsController);
 
-export default createUserController;
+export default ProductRouter;
