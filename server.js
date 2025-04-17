@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cors  from 'cors';
 import mongoose from 'mongoose';
 import UserRouter from "./api_routes/User/userRoutes.js";
+import checkUser from "./middleware/checkUser.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ const host = process.env.HOST;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(checkUser);
 
 try {
     mongoose.connect(process.env.MONGODB_URI).then(() => {
