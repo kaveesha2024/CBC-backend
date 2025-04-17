@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import bodyParser from "body-parser";
 import cors  from 'cors';
 import mongoose from 'mongoose';
-import router from "./api_routes/Product/productRoutes.js";
+import UserRouter from "./api_routes/Product/productRoutes.js";
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ try {
 //     console.log("MongoDB Connected");
 // }catch(err){console.log(err)}
 
-app.use('/api', router)
+app.use('/api/users', UserRouter)
 
 app.listen( port, () => {
     console.log(`server is running on "http://${host}:${port}"`);
