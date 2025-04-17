@@ -40,7 +40,7 @@ const productSchema = new mongoose.Schema({
     category: String,
     isAvailable: {
         type: Boolean,
-        default: false,
+        default: true,
         required: true,
     },
     quantity: {
