@@ -22,19 +22,6 @@ const signinUserController = async (req, res) => {
 
   const { email, password: userPassword } = req.body;
 
-  // try {
-  //     const user = await UserModel.findOne({ email });
-  //     if (!user) {
-  //         res.status(404).json({
-  //             message : "User not found",
-  //         });
-  //         return;
-  //     }
-
-  // }catch (error) {
-  //     console.log(error);
-  // }
-
   const user = await UserModel.findOne({ email });
   if (!user) {
     res.status(404).json({
@@ -49,9 +36,33 @@ const signinUserController = async (req, res) => {
     );
 
     if (isPasswordCorrect) {
-      res.json({
-        message: "Login successful",
-      });
+      const {
+        _id,
+        firstName,
+        lastName,
+        email,
+        isAdmin,
+        isBlocked,
+        phoneNumber,
+        profileImage,
+      } = user;
+
+      const token = jwt.sign(
+        {
+          _id,
+          firstName,
+          lastName,
+          email,
+          isAdmin,
+          isBlocked,
+          phoneNumber,
+          profileImage,
+        },
+        process.env.JWT_SECRET
+      );
+
+      res.json(token);
+      return;
     } else {
       res.json({
         message: "Invalid Password",
