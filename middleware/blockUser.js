@@ -3,7 +3,7 @@ const blockUser = (req, res, next) => {
         next ();
         return;
     }
-    if (req.user.isBlocked)
+    if (req.user.isBlocked) {
         return res.status(401).json({
             message: "You don't have permission to access this site",
         });
