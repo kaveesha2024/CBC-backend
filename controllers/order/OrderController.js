@@ -14,6 +14,14 @@ const orderController = async (req, res) => {
     });
     return;
   }
+
+  if (!req.body.products.length > 0) {
+    res.status(401).json({
+      message: "You can not place orders with zero products!",
+    });
+    return;
+  }
+
   let orderNumber = "";
   const response = await OrderModel.find().sort({ createdAt: -1 }).limit(1);
   if (response.length > 0) {
