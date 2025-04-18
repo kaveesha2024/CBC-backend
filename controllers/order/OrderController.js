@@ -44,6 +44,7 @@ const orderController = async (req, res) => {
   try {
     let totalPrice = 0;
     let totalLabelledPrice = 0;
+    let totalDiscount = 0;
     let validProducts = [];
 
     for (let i = 0; i < products.length; i++) {
@@ -69,6 +70,7 @@ const orderController = async (req, res) => {
         quantity: products[i].quantity,
       };
       totalLabelledPrice += response.labelledPrice * products[i].quantity;
+      totalDiscount += response.discounts * products[i].quantity;
       totalPrice += response.price * products[i].quantity;
     }
 
@@ -81,6 +83,7 @@ const orderController = async (req, res) => {
       totalPrice,
       phoneNumber,
       address,
+      discount: totalDiscount,
     });
     const response = await order.save();
     res.status(200).json(response);
