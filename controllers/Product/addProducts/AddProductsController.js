@@ -51,6 +51,7 @@ const addProductsController = async (req, res) => {
       discounts,
       category,
       quantity,
+      alterNames,
     } = req.body;
 
     const product = new ProductModel({
@@ -65,6 +66,7 @@ const addProductsController = async (req, res) => {
       discounts,
       category,
       quantity,
+      alterNames,
     });
 
     try {

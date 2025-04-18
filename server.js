@@ -7,6 +7,7 @@ import UserRouter from "./api_routes/User/userRoutes.js";
 import checkUser from "./middleware/checkUser.js";
 import ProductRouter from "./api_routes/Product/productRoutes.js";
 import blockUser from "./middleware/blockUser.js";
+import orderRouter from "./api_routes/order/orderRoutes.js";
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ try {
 
 app.use("/api/users", UserRouter);
 app.use("/api/products", ProductRouter);
+app.use("/api/order", orderRouter);
 
 app.listen(port, () => {
   console.log(`server is running on "http://${host}:${port}"`);
