@@ -16,7 +16,12 @@ const updateProductController = async (req, res) => {
 
   if (req.user.isAdmin){
       const productId = req.query.productId;
-
+      if (!productId) {
+          res.status(401).json({
+              message: "Product id is missing!",
+          });
+          return;
+      }
       try {
           const response = await ProductModel.updateOne({ productId }, req.body);
           res.status(200).json(response);

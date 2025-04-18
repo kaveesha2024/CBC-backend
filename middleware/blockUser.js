@@ -5,7 +5,7 @@ const blockUser = (req, res, next) => {
     }
     if (req.user.isBlocked) {
         return res.status(401).json({
-            message: "You don't have permission to access this site",
+            message: "You have been blocked by administrator!, can not access this site!",
         });
     }else {
         next();
