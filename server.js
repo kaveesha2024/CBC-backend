@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import UserRouter from "./api_routes/User/userRoutes.js";
 import checkUser from "./middleware/checkUser.js";
 import ProductRouter from "./api_routes/Product/productRoutes.js";
+import blockUser from "./middleware/blockUser.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(checkUser);
+app.use(blockUser)
 
 try {
   mongoose
