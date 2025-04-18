@@ -17,18 +17,6 @@ const productSchema = new mongoose.Schema(
     },
     brand: String,
     images: [String],
-    reviews: {
-      type: [
-        {
-          comments: {
-            type: String,
-            required: true,
-          },
-          images: [String],
-        },
-      ],
-      default: [],
-    },
     labelledPrice: {
       type: Number,
       required: true,

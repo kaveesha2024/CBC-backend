@@ -3,11 +3,13 @@ import addProductsController from "../../controllers/Product/addProducts/AddProd
 import viewProductsController from "../../controllers/Product/viewProducts/ViewProductsController.js";
 import updateProductController from "../../controllers/Product/updateProducts/UpdateProductController.js";
 import viewProductByIdController from "../../controllers/Product/viewProductById/ViewProductByIdController.js";
+import submitReviewController from "../../controllers/reviews/submitReview/SubmitReviewController.js";
 const ProductRouter = express.Router();
 
 ProductRouter.get("/", viewProductsController);
 ProductRouter.get("/product", viewProductByIdController);
 ProductRouter.post("/add", addProductsController);
 ProductRouter.put("/update", updateProductController);
+ProductRouter.post("/review", submitReviewController);
 
 export default ProductRouter;

@@ -1,5 +1,5 @@
-import OrderModel from "../../models/order/OrderModel.js";
-import ProductModel from "../../models/Product/ProductModel.js";
+import OrderModel from "../../../models/order/OrderModel.js";
+import ProductModel from "../../../models/Product/ProductModel.js";
 
 const orderController = async (req, res) => {
   if (!req.user) {
