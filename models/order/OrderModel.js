@@ -26,9 +26,10 @@ const orderSchema = mongoose.Schema(
             type: String,
             required: true,
           },
-          alterNames: {
-            type: String,
-          },
+          alterNames: [{
+              type: String,
+              required: true,
+          }],
           description: [
             {
               type: String,
@@ -57,6 +58,7 @@ const orderSchema = mongoose.Schema(
     totalLabelledPrice: {
       type: Number,
       required: true,
+      default: 0,
     },
     status: {
       type: String,
@@ -66,6 +68,7 @@ const orderSchema = mongoose.Schema(
     totalPrice: {
       type: Number,
       required: true,
+      default: 0,
     },
     discount: {
       type: Number,
@@ -76,21 +79,8 @@ const orderSchema = mongoose.Schema(
       required: true,
     },
     address: {
-      type: {
-        province: String,
-        city: String,
-        postalCode: Number,
-        homeOrOffice: String,
-        address: String,
-        name: String,
-        landMark: String,
-      },
+      type: String,
       required: true,
-    },
-    date: {
-      type: Date,
-      required: true,
-      default: Date.now,
     },
   },
   { timestamps: true },
