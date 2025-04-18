@@ -3,26 +3,32 @@ import ProductModel from "../../../models/Product/ProductModel.js";
 const viewProductsController = async (req, res) => {
     if (!req.user) {
         try {
-            const response = await ProductModel.find();
+            const response = await ProductModel.find({isAvailable: true});
             res.status(200).json(response);
+        }catch (error) {
+            res.status(500).json({
+                message: "Internal Server Error!",
+            })
         }
-        catch (error) {
-            res.status(500).json(error);
-        }
-        return ;
     }
-
-    if (req.user.isBlocked) {
-        return res.status(401).json({
-            message: "You can't access this site",
-        });
-    }else {
+    if (req.user.isAdmin) {
         try {
             const response = await ProductModel.find();
             res.status(200).json(response);
         }
         catch (error) {
-            res.status(500).json(error);
+            res.status(500).json({
+                message: "Internal Server Error!",
+            });
+        }
+    }else {
+        try {
+            const response = await ProductModel.find({isAvailable: true});
+            res.status(200).json(response);
+        }catch (error) {
+            res.status(500).json({
+                message: "Internal Server Error!",
+            })
         }
     }
 };
