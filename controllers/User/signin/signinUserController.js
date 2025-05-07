@@ -7,7 +7,8 @@ dotenv.config();
 
 const signinUserController = async (req, res) => {
   if (req.body == null) {
-    res.status(400).json({
+    res.json({
+      status: 401,
       message: "You haven't Provide your details!",
     });
     return;
@@ -15,6 +16,7 @@ const signinUserController = async (req, res) => {
 
   if (!req.body.email || !req.body.password) {
     res.json({
+      status: 401,
       message: "Email & password required",
     });
     return;
@@ -24,7 +26,8 @@ const signinUserController = async (req, res) => {
 
   const user = await UserModel.findOne({ email });
   if (!user) {
-    res.status(404).json({
+    res.json({
+      status: 401,
       message: "User not found",
     });
     return;
@@ -65,6 +68,7 @@ const signinUserController = async (req, res) => {
       return;
     } else {
       res.json({
+        status: 401,
         message: "Invalid Password",
       });
       return;
