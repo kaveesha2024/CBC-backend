@@ -5,13 +5,15 @@ dotenv.config();
 
 const signupUserController = async (req, res) => {
   if (req.body == null) {
-    res.status(400).json({
+    res.json({
+      status: 401,
       message: "Provide customer details!",
     });
     return;
   }
   if (!req.body.email) {
-    return res.status(400).json({
+    return res.json({
+      status: 401,
       message: "Email is required",
     });
   }
@@ -25,8 +27,9 @@ const signupUserController = async (req, res) => {
           !req.body.email ||
           !req.body.password
       ) {
-          return res.status(400).json({
-              error: "Fill all the required fields",
+          return res.json({
+              status: 401,
+              message: "Fill all the required fields",
           });
       }
       const { firstName, lastName, email, password, phoneNumber, salt } = req.body;
@@ -44,12 +47,23 @@ const signupUserController = async (req, res) => {
 
       try {
           const response = await user.save();
-          return res.status(200).json(response);
+          if (response) {
+              res.status(200).json({
+                  status: 200,
+                  message: "User created successfully",
+              });
+          }else{
+              res.json({
+                  status: 500,
+                  message: "Error creating user",
+              });
+          }
       } catch (error) {
           res.status(400).json(error);
       }
   }else {
-      return res.status(401).json({
+      return res.json({
+          status: 401,
           message: "Email already exist. You can try to sign in.",
       })
   }
