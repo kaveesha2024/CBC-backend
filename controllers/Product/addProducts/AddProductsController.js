@@ -69,7 +69,11 @@ const addProductsController = async (req, res) => {
 
     try {
       const response = await product.save();
-      res.status(200).json(response);
+      res.status(200).json({
+        status: 200,
+        message: "Product added successfully",
+        data: response,
+      });
     } catch (error) {
       console.log(error);
     }

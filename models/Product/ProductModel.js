@@ -42,6 +42,23 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    reviews: [
+      {
+        type: {
+          comments: {
+            type: String,
+            required: true,
+          },
+          images: [String],
+          isHidden: {
+            type: Boolean,
+            default: false,
+            required: true,
+          },
+        },
+        default: [],
+      }
+    ]
   },
   { timestamps: true },
 );

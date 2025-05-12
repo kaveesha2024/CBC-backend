@@ -64,7 +64,7 @@ const signinUserController = async (req, res) => {
         process.env.JWT_SECRET
       );
 
-      res.json({ token });
+      res.json({ token, user });
       return;
     } else {
       res.json({
