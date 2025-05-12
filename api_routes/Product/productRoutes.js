@@ -5,6 +5,7 @@ import updateProductController from "../../controllers/Product/updateProducts/Up
 import viewProductByIdController from "../../controllers/Product/viewProductById/ViewProductByIdController.js";
 import submitReviewController from "../../controllers/reviews/submitReview/SubmitReviewController.js";
 import updateReviewController from "../../controllers/reviews/updateReview/UpdateReviewController.js";
+import deleteProductController from "../../controllers/Product/deleteProduct/DeleteProductController.js";
 const ProductRouter = express.Router();
 
 ProductRouter.get("/", viewProductsController);
@@ -13,5 +14,6 @@ ProductRouter.post("/add", addProductsController);
 ProductRouter.put("/update", updateProductController);
 ProductRouter.post("/review", submitReviewController);
 ProductRouter.put("/review/update", updateReviewController);
+ProductRouter.delete("/delete", deleteProductController);
 
 export default ProductRouter;
