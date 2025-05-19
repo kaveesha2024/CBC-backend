@@ -5,23 +5,29 @@ const viewProductByIdController = async (req, res) => {
     try {
       const productId = req.query.productid;
       if (!productId) {
-        res.status(401).json({
+        res.json({
+          status: 401,
           message: "Product id is missing!",
         });
         return;
       }
       const response = await ProductModel.findOne({ productId });
       if (!response) {
-        res.status(404).json({
+        res .json({
+          status: 404,
           message: "Product not found!",
         });
         return;
       }
       if (response.isAvailable) {
-        res.status(200).json(response);
+        res.status(200).json({
+          status: 200,
+          message: response,
+        });
         return;
       } else {
-        res.status(404).json({
+        res.json({
+          status: 404,
           message: "Product not found!",
         });
         return;
@@ -37,14 +43,18 @@ const viewProductByIdController = async (req, res) => {
   if (req.user.isAdmin) {
     const productId = req.query.productid;
     if (!productId) {
-      res.status(401).json({
+      res.json({
+        status: 401,
         message: "Product id is missing!",
       });
       return;
     }
     try {
       const response = await ProductModel.findOne({ productId });
-      res.status(200).json(response);
+      res.json({
+        status: 200,
+        message: response,
+      });
     } catch (error) {
       res.status(500).json({
         message: "Internal Server Error",
